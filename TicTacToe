@@ -1,0 +1,127 @@
+import java.util.Scanner;
+
+public class TicTacToe {
+	Players p;
+	int[][] matrix;
+	public TicTacToe() {
+		p=new Players();
+		p.setI(0);
+		matrix=new int[3][3];
+	}
+	public void initializeTheGame() {
+		for(int i=0;i<matrix.length;i++) {
+			for(int j=0;j<matrix.length;j++) {
+				matrix[i][j]=2;
+			}
+		}
+	}
+	public void printMatrix() {
+		for(int i=0;i<matrix.length;i++) {
+			for(int j=0;j<matrix.length;j++) {
+				System.out.print(matrix[i][j]+" ");
+			}
+			System.out.println();
+		}
+	}
+	public void playGame() {
+		Scanner sc=new Scanner(System.in);
+		while(true) {
+			boolean flag=checkBlockage();
+			if(flag==false) {
+				System.out.println("No Valid moves available closing game");
+				break;
+			}
+			printMatrix();
+			System.out.println("Player number "+p.getI()+" please provide cell number using comma");
+			String[] cell=sc.next().split(",");
+			int row=Integer.parseInt(cell[0]);
+			int column=Integer.parseInt(cell[1]);
+			boolean addValue=addValueToMatrix(row,column);
+			while(addValue!=true) {
+			System.out.println("Please provide valid move");
+			cell=sc.next().split(",");
+			row=Integer.parseInt(cell[0]);
+			column=Integer.parseInt(cell[1]);
+			addValue=addValueToMatrix(row,column);
+			}
+			//matrix[row][column]=p.getI();
+			boolean checkWin=checkWin();
+			if(checkWin) {
+				System.out.println("Player "+p.getI()+" win");
+				break;
+			}
+			else {
+				if(p.getI()==0)
+					p.setI(1);
+				else
+					p.setI(0);
+			}	
+		}
+	}
+	public boolean addValueToMatrix(int row,int column) {
+		if(matrix[row][column]==2) {
+			matrix[row][column]=p.getI();
+			return true;
+		}
+		return false;
+	}
+	public boolean checkBlockage() {
+		for(int i=0;i<matrix.length;i++) {
+			for(int j=0;j<matrix.length;j++) {
+				if(matrix[i][j]==2) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean checkWin() {
+		//printMatrix();
+		if(matrix[0][0] !=2 && matrix[0][0]==matrix[0][1] && matrix[0][1]==matrix[0][2]) {
+			return true;
+		}
+		if(matrix[1][0] !=2 && matrix[1][0]==matrix[1][1] && matrix[1][1]==matrix[1][2]) {
+			return true;
+		}
+		if(matrix[2][0] !=2 && matrix[2][0]==matrix[2][1] && matrix[2][1]==matrix[2][2]) {
+			return true;
+		}
+		if(matrix[0][0] !=2 && matrix[0][0]==matrix[1][1] && matrix[1][1]==matrix[2][2]) {
+			return true;
+		}
+		if(matrix[0][2] !=2 && matrix[0][2]==matrix[1][1] && matrix[1][1]==matrix[2][0]) {
+			return true;
+		}
+		if(matrix[0][0] !=2 && matrix[0][0]==matrix[1][0] && matrix[1][0]==matrix[2][0]) {
+			return true;
+		}
+		if(matrix[0][1] !=2 && matrix[0][1]==matrix[1][1] && matrix[1][1]==matrix[2][1]) {
+			return true;
+		}
+		if(matrix[0][2] !=2 && matrix[0][2]==matrix[1][2] && matrix[1][2]==matrix[2][2]) {
+			return true;
+		}
+		return false;
+	}
+	public static void main(String[] args) {
+		TicTacToe t=new TicTacToe();
+		t.initializeTheGame();
+		t.playGame();
+	}
+}
+
+
+//Value of player keeps on changing from 0 , 1
+class Players{
+	private int i;
+
+	public int getI() {
+		return i;
+	}
+
+	public void setI(int i) {
+		this.i = i;
+	}
+	
+}
