@@ -1,0 +1,49 @@
+#!/bin/bash
+#comment
+echo "hello world"
+MyName="akshay"
+echo "${MyName} is my name"
+declare -r NUM1=5
+num2=4
+num3=$((NUM1+num2))
+echo "num3 is ${num3}"
+echo $((5**2))
+rand=5
+let rand+=4
+echo "$rand rand op"
+
+cat<<END 
+this is test
+print this
+END
+
+getDate(){
+  date
+  return
+}
+getDate
+
+name="akshay"
+#globle variable
+
+demLocal(){
+	local name="kshitija"
+	return 
+}
+demLocal
+
+echo $name
+
+getSum(){
+	local num3=$1
+	local num4=$2
+	local sum=$((num3+num4))
+	echo $sum
+}
+num1=5
+num2=6
+sum=$(getSum num1 num2)
+echo $sum
+
+
+

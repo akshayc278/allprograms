@@ -1,0 +1,61 @@
+#!/bin/bash
+
+str1=""
+str2="sad"
+str3="happy"
+
+if [[ "$str1" ]];then
+	echo " str1 is not null"
+fi
+
+str4="happy"
+
+if [[ "$str3" == "$str4" ]] ; then
+	echo "same"
+fi
+
+num=10
+case $num in
+	[0-4])
+		echo "to young"
+		;;
+	5)
+		echo "1st year class"
+		;;
+	[6-9]|1[0-8])
+		echo "10 years"
+		;;
+	*)
+		echo "no input"
+		;;
+esac
+
+num=1
+while [[ $num -le 10 ]] ; do
+	echo $num
+	num=$((num + 1))
+done
+
+for (( i=0; i<=10 ;i++ ));do
+	echo "$i for value"
+done
+
+for i in {A..B};do
+	echo $i
+done
+
+fav_nums=(3.14 2.17)
+echo "pi : ${fav_nums[0]}"
+
+fav_nums+=(1 7)
+for i in ${fav_nums[*]};do
+	echo $i
+done
+
+for i in ${fav_nums[@]};do
+	echo $i
+done
+
+echo "length is ${#fav_nums[@]}"
+echo "index 1 length ${#fav_nums[2]}"
+

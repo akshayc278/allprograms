@@ -1,0 +1,18 @@
+#!/bin/bash
+
+read -p "how old are you? " age
+if [[ $age -ge 16 ]]
+then 
+	echo " you can drive"
+elif [[ $age -eq 15 ]]
+then
+	echo "can drive next year"
+else
+	echo" you can not drive"
+fi
+
+read -p "entera num" num
+if (( num == 10 ));
+then
+	echo "it is 10"
+fi
